@@ -3,7 +3,7 @@ import { Layout } from "./pages/Layout";
 import { Start } from "./pages/Start";
 import { Animals } from "./pages/Animals";
 import { MyAnimals } from "./pages/MyAnimals";
-import { AnimalDetail } from "./pages/AnilalDetail";
+import { AnimalDetail } from "./pages/AnimalDetail";
 
 export const router = createBrowserRouter([
   {

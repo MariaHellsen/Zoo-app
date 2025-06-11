@@ -1,11 +1,11 @@
 export interface IAnimal {
-  Name: string;
-  Id: number;
-  ShortDescription: string;
-  ImageUrl: string;
+  name: string;
+  id: number;
+  shortDescription: string;
+  imageUrl: string;
 }
 
 export interface IAnimalExt extends IAnimal {
-  YearOfBirth: string;
-  LongDescription: string;
+  yearOfBirth: string;
+  longDescription: string;
 }
