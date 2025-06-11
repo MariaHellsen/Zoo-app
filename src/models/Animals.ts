@@ -4,8 +4,3 @@ export interface IAnimal {
   shortDescription: string;
   imageUrl: string;
 }
-
-export interface IAnimalExt extends IAnimal {
-  yearOfBirth: string;
-  longDescription: string;
-}

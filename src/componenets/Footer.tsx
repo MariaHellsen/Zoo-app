@@ -9,9 +9,6 @@ export const Footer = () => {
       <li>
         <NavLink to={"/animals"}>Djuren</NavLink>
       </li>
-      <li>
-        <NavLink to={"/myAnimals"}>Mina djur</NavLink>
-      </li>
     </ul>
   );
 };
