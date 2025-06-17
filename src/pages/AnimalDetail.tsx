@@ -3,12 +3,32 @@ import { useParams, useNavigate } from "react-router-dom";
 import { AnimalsContext } from "../contexts/AnimalsContext";
 import { AnimalDetailContext } from "../contexts/AnimalDetailContext";
 import { AnimalDetailActionTypes } from "../reducers/AnimalDetailReducer";
+import type { IAnimal } from "../models/Animals";
+
+import WildHorseImg from "../img/WildHorse.png";
+import ChinchillaImg from "../img/Chinchilla.png";
+import RabbitImg from "../img/Rabbit.png";
+import ChamaeleonImg from "../img/Chamaeleon.png";
 
 export const AnimalDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { animals } = useContext(AnimalsContext);
   const { selectedAnimal, dispatch } = useContext(AnimalDetailContext);
+
+  const imageReplacements: { [key: number]: string } = {
+    4: RabbitImg,
+    8: WildHorseImg,
+    10: ChamaeleonImg,
+    13: ChinchillaImg,
+  };
+
+  const getImageSrc = (animal: IAnimal): string => {
+    if (imageReplacements[animal.id]) {
+      return imageReplacements[animal.id];
+    }
+    return animal.imageUrl;
+  };
 
   useEffect(() => {
     if (!id || !animals.length) return;
@@ -61,7 +81,7 @@ export const AnimalDetail = () => {
         <h1>{selectedAnimal.name}</h1>
 
         <div className="animal-detail-image">
-          <img src={selectedAnimal.imageUrl} alt={selectedAnimal.name} />
+          <img src={getImageSrc(selectedAnimal)} alt={selectedAnimal.name} />
         </div>
 
         <div className="animal-info">
