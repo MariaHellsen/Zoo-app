@@ -1,6 +1,12 @@
 export interface IAnimal {
-  name: string;
   id: number;
+  name: string;
   shortDescription: string;
+  longDescription: string;
   imageUrl: string;
+  yearOfBirth: string;
+  latinName?: string;
+  medicine?: string;
+  isFed?: boolean;
+  lastFed?: string;
 }

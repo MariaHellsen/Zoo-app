@@ -5,9 +5,15 @@ import { useEffect, useReducer } from "react";
 import { AnimalActionTypes, AnimalReducer } from "./reducers/AnimalReducer";
 import { AnimalsContext } from "./contexts/AnimalsContext";
 import type { IAnimal } from "./models/Animals";
+import { AnimalDetailContext } from "./contexts/AnimalDetailContext";
+import { AnimalDetailReducer } from "./reducers/AnimalDetailReducer";
 
 function App() {
   const [animals, animalDispatch] = useReducer(AnimalReducer, []);
+  const [selectedAnimal, animalDetailDispatch] = useReducer(
+    AnimalDetailReducer,
+    null
+  );
 
   useEffect(() => {
     const getAnimals = async () => {
@@ -25,12 +31,16 @@ function App() {
     if (animals.length > 0) return;
 
     getAnimals();
-  });
+  }, [animals.length]);
 
   return (
     <>
       <AnimalsContext.Provider value={{ animals, dispatch: animalDispatch }}>
-        <RouterProvider router={router}></RouterProvider>
+        <AnimalDetailContext.Provider
+          value={{ selectedAnimal, dispatch: animalDetailDispatch }}
+        >
+          <RouterProvider router={router}></RouterProvider>
+        </AnimalDetailContext.Provider>
       </AnimalsContext.Provider>
     </>
   );

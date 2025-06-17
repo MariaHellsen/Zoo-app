@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { AnimalsContext } from "../contexts/AnimalsContext";
+import { useNavigate } from "react-router-dom";
 
 export const Animals = () => {
   const { animals } = useContext(AnimalsContext);
+  const navigate = useNavigate();
   return (
     <>
       <h2>Vår Digitala Djurfamilj</h2>
@@ -14,7 +16,9 @@ export const Animals = () => {
               <img src={a.imageUrl} alt={a.name} />
             </div>
             <p>{a.shortDescription}</p>
-            <button>Välj djuret</button>
+            <button onClick={() => navigate(`/animal/${a.id}`)}>
+              Välj djuret
+            </button>
           </div>
         ))}
       </div>
