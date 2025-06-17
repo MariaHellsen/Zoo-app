@@ -53,7 +53,7 @@ export const AnimalDetail = () => {
 
   return (
     <div className="animal-detail">
-      <button onClick={() => navigate("/")} className="back-button">
+      <button onClick={() => navigate("/animals")} className="back-button">
         ← Tillbaka till djurlistan
       </button>
 
