@@ -21,10 +21,31 @@ export const AnimalDetail = () => {
         payload: animal,
       });
     } else {
-      // Animal not found, redirect to animals list
       navigate("/");
     }
   }, [id, animals, dispatch, navigate]);
+
+  const handleFeedAnimal = async () => {
+    if (!selectedAnimal) return;
+
+    try {
+      await fetch(
+        `https://animals.azurewebsites.net/api/animals/${selectedAnimal.id}/feed`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error) {
+      console.error("Error feeding animal:", error);
+    } finally {
+      dispatch({
+        type: AnimalDetailActionTypes.FEED_ANIMAL,
+      });
+    }
+  };
 
   if (!selectedAnimal) {
     return <div>Laddar djur...</div>;
@@ -58,7 +79,7 @@ export const AnimalDetail = () => {
             <strong>Senast utfodrad:</strong>{" "}
             {selectedAnimal.lastFed
               ? new Date(selectedAnimal.lastFed).toLocaleString("sv-SE")
-              : "Okänt"}
+              : "Aldrig"}
           </p>
           <p>
             <strong>Utfodrad:</strong> {selectedAnimal.isFed ? "Ja" : "Nej"}
@@ -78,14 +99,8 @@ export const AnimalDetail = () => {
         </div>
 
         <div className="animal-actions">
-          <button
-            onClick={() => {
-              // Here you could add feeding logic
-              console.log(`Utfodrar ${selectedAnimal.name}`);
-            }}
-            className="feed-button"
-          >
-            Mata djuret
+          <button onClick={handleFeedAnimal} className="feed-button">
+            Mata {selectedAnimal.name}
           </button>
         </div>
       </div>

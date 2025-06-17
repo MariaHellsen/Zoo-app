@@ -3,6 +3,7 @@ import type { IAnimal } from "../models/Animals";
 export enum AnimalDetailActionTypes {
   SELECT_ANIMAL,
   CLEAR_SELECTION,
+  FEED_ANIMAL,
 }
 
 export type AnimalDetailAction = {
@@ -20,6 +21,14 @@ export const AnimalDetailReducer = (
 
     case AnimalDetailActionTypes.CLEAR_SELECTION:
       return null;
+
+    case AnimalDetailActionTypes.FEED_ANIMAL:
+      if (!state) return null;
+      return {
+        ...state,
+        isFed: true,
+        lastFed: new Date().toISOString(),
+      };
 
     default:
       return state;
