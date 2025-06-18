@@ -23,16 +23,28 @@ export const Animals = () => {
 
   return (
     <>
-      <h2>Vår Digitala Djurfamilj</h2>
-      <div className="animals">
+      <h2 className="text-2xl font-bold text-center mb-8">
+        Vår Digitala Djurfamilj
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {animals.map((a) => (
-          <div key={a.id} className="animal">
-            <h3>{a.name}</h3>
+          <div
+            key={a.id}
+            className="bg-white rounded-lg shadow-md p-6 text-center"
+          >
+            <h3 className="text-xl font-semibold mb-4">{a.name}</h3>
             <div className="img-container">
-              <img src={getImageSrc(a)} alt={a.name} />
+              <img
+                src={getImageSrc(a)}
+                alt={a.name}
+                className="w-100 h-100 rounded-full object-cover mx-auto"
+              />
             </div>
-            <p>{a.shortDescription}</p>
-            <button onClick={() => navigate(`/animal/${a.id}`)}>
+            <p className="text-gray-600 mb-4">{a.shortDescription}</p>
+            <button
+              onClick={() => navigate(`/animal/${a.id}`)}
+              className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors"
+            >
               Välj djuret
             </button>
           </div>
