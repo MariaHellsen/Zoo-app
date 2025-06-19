@@ -81,14 +81,11 @@ export const AnimalDetail = () => {
       </button>
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
-        {/* Header */}
         <div className="bg-green-500 text-white p-6 text-center">
           <h1 className="text-3xl font-bold">{selectedAnimal.name}</h1>
         </div>
 
-        {/* Content */}
         <div className="p-6">
-          {/* Image Section */}
           <div className="text-center mb-8">
             <div className="inline-block">
               <img
@@ -99,9 +96,7 @@ export const AnimalDetail = () => {
             </div>
           </div>
 
-          {/* Information Grid */}
           <div className="grid md:grid-cols-2 gap-8 mb-8">
-            {/* Basic Info */}
             <div className="bg-gray-50 rounded-lg p-6">
               <h2 className="text-xl font-semibold mb-4 text-gray-800">
                 Information
@@ -130,7 +125,6 @@ export const AnimalDetail = () => {
               </div>
             </div>
 
-            {/* Feeding Info */}
             <div className="bg-gray-50 rounded-lg p-6">
               <h2 className="text-xl font-semibold mb-4 text-gray-800">
                 Utfodring
