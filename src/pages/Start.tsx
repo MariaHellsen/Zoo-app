@@ -8,6 +8,19 @@ export const Start = () => {
         <h3 className="text-xl md:text-2xl lg:text-3xl max-w-2xl animate-fadeIn animate-delay-100">
           Upplev glädjen i att mata våra vänner, tryggt från din skärm.
         </h3>
+        <div className="absolute bottom-[340px] left-0 w-full h-[200px] overflow-hidden pointer-events-none">
+          <div className="relative w-full h-full">
+            <img
+              src="src/img/Parot.png"
+              alt="Papegoja"
+              className="absolute top-1/2 w-80 h-200 object-contain"
+              style={{
+                animation: "parotMove 10s linear infinite",
+                transform: "translateY(-50%)",
+              }}
+            />
+          </div>
+        </div>
         <div className="absolute bottom-[1px] left-0 w-full h-[120px] overflow-hidden pointer-events-none">
           <div className="relative w-full h-full">
             <img
@@ -16,6 +29,20 @@ export const Start = () => {
               className="absolute top-1/2 w-50 h-200 object-contain"
               style={{
                 animation: "hedgehogMove 20s linear infinite",
+                transform: "translateY(-50%)",
+              }}
+            />
+          </div>
+        </div>
+        <div className="absolute bottom-[1px] left-0 w-full h-[180px] overflow-hidden pointer-events-none">
+          <div className="relative w-full h-full">
+            <img
+              src="src/img/Dog.png"
+              alt="Hund"
+              className="absolute top-1/2 w-50 h-220 object-contain"
+              style={{
+                animation: "dogMove 20s linear infinite",
+                animationDelay: "9s",
                 transform: "translateY(-50%)",
               }}
             />

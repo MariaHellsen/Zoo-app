@@ -6,3 +6,21 @@
     left: calc(100% + 80px);
   }
 }
+
+@keyframes parotMove {
+  0% {
+    left: -80px;
+  }
+  100% {
+    left: calc(100% + 80px);
+  }
+}
+
+@keyframes dogMove {
+  0% {
+    left: -80px;
+  }
+  100% {
+    left: calc(100% + 80px);
+  }
+}
