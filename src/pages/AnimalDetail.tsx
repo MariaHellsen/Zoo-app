@@ -72,56 +72,138 @@ export const AnimalDetail = () => {
   }
 
   return (
-    <div className="animal-detail">
-      <button onClick={() => navigate("/animals")} className="back-button">
+    <div className="max-w-4xl mx-auto p-6">
+      <button
+        onClick={() => navigate("/animals")}
+        className="mb-6 bg-whitetext-gray-800 text-xl font-bold hover:text-gray-900 inline-flex items-center"
+      >
         ← Tillbaka till djurlistan
       </button>
 
-      <div className="animal-detail-content">
-        <h1>{selectedAnimal.name}</h1>
-
-        <div className="animal-detail-image">
-          <img src={getImageSrc(selectedAnimal)} alt={selectedAnimal.name} />
+      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        {/* Header */}
+        <div className="bg-green-500 text-white p-6 text-center">
+          <h1 className="text-3xl font-bold">{selectedAnimal.name}</h1>
         </div>
 
-        <div className="animal-info">
-          <h2>Information</h2>
-          <p>
-            <strong>Latinskt namn:</strong> {selectedAnimal.latinName}
-          </p>
-          <p>
-            <strong>Födelseår:</strong> {selectedAnimal.yearOfBirth}
-          </p>
-          <p>
-            <strong>Medicin:</strong> {selectedAnimal.medicine || "Inga"}
-          </p>
-          <p>
-            <strong>Senast utfodrad:</strong>{" "}
-            {selectedAnimal.lastFed
-              ? new Date(selectedAnimal.lastFed).toLocaleString("sv-SE")
-              : "Aldrig"}
-          </p>
-          <p>
-            <strong>Utfodrad:</strong> {selectedAnimal.isFed ? "Ja" : "Nej"}
-          </p>
-        </div>
+        {/* Content */}
+        <div className="p-6">
+          {/* Image Section */}
+          <div className="text-center mb-8">
+            <div className="inline-block">
+              <img
+                src={getImageSrc(selectedAnimal)}
+                alt={selectedAnimal.name}
+                className="w-64 h-64 rounded-full object-cover mx-auto shadow-lg"
+              />
+            </div>
+          </div>
 
-        <div className="animal-description">
-          <h2>Beskrivning</h2>
-          <p>{selectedAnimal.shortDescription}</p>
+          {/* Information Grid */}
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            {/* Basic Info */}
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h2 className="text-xl font-semibold mb-4 text-gray-800">
+                Information
+              </h2>
+              <div className="space-y-3">
+                <div>
+                  <span className="font-medium text-gray-700">
+                    Latinskt namn:
+                  </span>
+                  <span className="ml-2 text-gray-600">
+                    {selectedAnimal.latinName}
+                  </span>
+                </div>
+                <div>
+                  <span className="font-medium text-gray-700">Födelseår:</span>
+                  <span className="ml-2 text-gray-600">
+                    {selectedAnimal.yearOfBirth}
+                  </span>
+                </div>
+                <div>
+                  <span className="font-medium text-gray-700">Medicin:</span>
+                  <span className="ml-2 text-gray-600">
+                    {selectedAnimal.medicine || "Inga"}
+                  </span>
+                </div>
+              </div>
+            </div>
 
-          {selectedAnimal.longDescription && (
-            <>
-              <h3>Detaljerad beskrivning</h3>
-              <p>{selectedAnimal.longDescription}</p>
-            </>
-          )}
-        </div>
+            {/* Feeding Info */}
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h2 className="text-xl font-semibold mb-4 text-gray-800">
+                Utfodring
+              </h2>
+              <div className="space-y-3">
+                <div>
+                  <span
+                    className={`font-medium ${
+                      selectedAnimal.isFed ? "text-green-600" : "text-gray-700"
+                    }`}
+                  >
+                    Senast utfodrad:
+                  </span>
+                  <span
+                    className={`font-medium ${
+                      selectedAnimal.isFed ? "text-green-600" : "text-gray-700"
+                    }`}
+                  >
+                    {selectedAnimal.lastFed
+                      ? new Date(selectedAnimal.lastFed).toLocaleString("sv-SE")
+                      : "Aldrig"}
+                  </span>
+                </div>
+                <div>
+                  <span
+                    className={`font-medium ${
+                      selectedAnimal.isFed ? "text-green-600" : "text-gray-700"
+                    }`}
+                  >
+                    Utfodrad:
+                  </span>
+                  <span
+                    className={`ml-2 font-medium ${
+                      selectedAnimal.isFed ? "text-green-600" : "text-red-600"
+                    }`}
+                  >
+                    {selectedAnimal.isFed ? "Ja" : "Nej"}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <div className="animal-actions">
-          <button onClick={handleFeedAnimal} className="feed-button">
-            Mata {selectedAnimal.name}
-          </button>
+          <div className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+              Beskrivning
+            </h2>
+            <div className="bg-gray-50 rounded-lg p-6">
+              <p className="text-gray-700 leading-relaxed mb-4">
+                {selectedAnimal.shortDescription}
+              </p>
+
+              {selectedAnimal.longDescription && (
+                <>
+                  <h3 className="text-lg font-semibold mb-3 text-gray-800">
+                    Detaljerad beskrivning
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {selectedAnimal.longDescription}
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+
+          <div className="text-center">
+            <button
+              onClick={handleFeedAnimal}
+              className="bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-8 rounded-lg transition-colors text-lg shadow-md hover:shadow-lg"
+            >
+              Mata {selectedAnimal.name}
+            </button>
+          </div>
         </div>
       </div>
     </div>
