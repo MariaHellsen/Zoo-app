@@ -31,10 +31,17 @@ export const AnimalDetail = () => {
   };
 
   useEffect(() => {
-    if (!id || !animals.length) return;
+    if (!id) return;
 
-    const animal = animals.find((a) => a.id === parseInt(id));
+    let animalsList: IAnimal[] = animals;
+    if (!animals.length) {
+      const stored = localStorage.getItem("animals");
+      if (stored) {
+        animalsList = JSON.parse(stored);
+      }
+    }
 
+    const animal = animalsList.find((a) => a.id === parseInt(id));
     if (animal) {
       dispatch({
         type: AnimalDetailActionTypes.SELECT_ANIMAL,
@@ -45,26 +52,31 @@ export const AnimalDetail = () => {
     }
   }, [id, animals, dispatch, navigate]);
 
+  // Updating localStorage instead of calling Api
   const handleFeedAnimal = async () => {
     if (!selectedAnimal) return;
 
-    try {
-      await fetch(
-        `https://animals.azurewebsites.net/api/animals/${selectedAnimal.id}/feed`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+    const updatedAnimal = {
+      ...selectedAnimal,
+      isFed: true,
+      lastFed: new Date().toISOString(),
+    };
+
+    dispatch({
+      type: AnimalDetailActionTypes.SELECT_ANIMAL,
+      payload: updatedAnimal,
+    });
+
+    const stored = localStorage.getItem("animals");
+    if (stored) {
+      const animalsList: IAnimal[] = JSON.parse(stored);
+      const updatedList = animalsList.map((a) =>
+        a.id === updatedAnimal.id ? updatedAnimal : a
       );
-    } catch (error) {
-      console.error("Error feeding animal:", error);
-    } finally {
-      dispatch({
-        type: AnimalDetailActionTypes.FEED_ANIMAL,
-      });
+      localStorage.setItem("animals", JSON.stringify(updatedList));
     }
+
+    console.log("Animal fed successfully!");
   };
 
   if (!selectedAnimal) {
@@ -75,7 +87,7 @@ export const AnimalDetail = () => {
     <div className="max-w-4xl mx-auto p-6">
       <button
         onClick={() => navigate("/animals")}
-        className="mb-6 bg-whitetext-gray-800 text-xl font-bold hover:text-gray-900 inline-flex items-center"
+        className="mb-6 bg-white text-gray-800 text-xl font-bold hover:text-gray-900 inline-flex items-center"
       >
         ← Tillbaka till djurlistan
       </button>

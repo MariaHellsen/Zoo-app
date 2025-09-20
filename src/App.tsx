@@ -15,12 +15,14 @@ function App() {
     null
   );
 
+  // Using localStorage
   useEffect(() => {
     const getAnimals = async () => {
       const response = await fetch(
         "https://animals.azurewebsites.net/api/animals"
       );
       const animals: IAnimal[] = await response.json();
+      localStorage.setItem("animals", JSON.stringify(animals));
 
       animalDispatch({
         type: AnimalActionTypes.LOADED,
